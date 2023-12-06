@@ -1,44 +1,41 @@
 import { ToDoItem } from "../components/ToDoItem";
+import { useGetItems } from "../hooks/useGetItems";
+import { useAddItem } from "../hooks/useAddItem";
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../config/firebase";
-
-export type Item = {
-  id: string;
-  content: string;
-  done: boolean;
-};
-
-// * Setup GitHub
-// * Make list items to be able to change database
 
 export const OpenToDo = () => {
-  const [items, setItems] = useState([] as Item[]);
+  const items = useGetItems();
+  const { addItem, success } = useAddItem();
+
+  const [addItemContent, setAddItemContent] = useState("");
 
   useEffect(() => {
-    getDocs(collection(db, "items"))
-      .then((snapshot) => {
-        let items2: any = [];
-        snapshot.docs.forEach((doc) => {
-          items2.push({ ...doc.data(), id: doc.id });
-        });
-
-        setItems(items2);
-      })
-      .catch((err) => {
-        console.error(err.message);
-      });
-  }, []);
-
-  useEffect(() => {
-    console.log(items);
-  }, [items]);
+    if (success) {
+      setAddItemContent("");
+    }
+  }, [success]);
 
   return (
-    <div>
-      {items.map((item) => (
-        <ToDoItem key={item.id} item={item} />
-      ))}
-    </div>
+    <>
+      <div className="flex">
+        <input
+          className="border mr-2"
+          type="text"
+          value={addItemContent}
+          onChange={(event) => setAddItemContent(event.target.value)}
+        />
+        <button
+          className="pointer"
+          onClick={() => addItemContent && addItem(addItemContent, false)}
+        >
+          Add
+        </button>
+      </div>
+      <div>
+        {items.map((item) => (
+          <ToDoItem key={item.id} item={item} />
+        ))}
+      </div>
+    </>
   );
 };
