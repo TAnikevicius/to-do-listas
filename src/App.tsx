@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { OpenToDo } from "./pages/OpenToDo";
-import { FinishedToDo } from "./pages/FinishedToDo";
+import { OpenToDoPage } from "./pages/OpenToDoPage";
+import { FinishedToDoPage } from "./pages/FinishedToDoPage";
 import { Layout } from "./components/Layout";
 
 function App() {
@@ -9,8 +9,8 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<OpenToDo />} />
-          <Route path="finished" element={<FinishedToDo />} />
+          <Route index element={<OpenToDoPage />} />
+          <Route path="finished" element={<FinishedToDoPage />} />
         </Route>
       </Routes>
     </div>

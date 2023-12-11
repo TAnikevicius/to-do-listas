@@ -14,13 +14,13 @@ export type Item = {
   done: boolean;
 };
 
-export const useGetItems = () => {
+export const useGetFinishedItems = () => {
   const [items, setItems] = useState([] as Item[]);
   const colRef = collection(db, "items");
 
   const itemsQuery = query(
     colRef,
-    where("done", "==", false),
+    where("done", "==", true),
     orderBy("createdAt"),
   );
 
