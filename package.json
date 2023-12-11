@@ -1,6 +1,7 @@
 {
   "name": "to-do-list",
   "version": "0.1.0",
+  "homepage": "https://TAnikevicius.github.io/To-Do-List",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "5.17.0",
@@ -19,6 +20,8 @@
     "web-vitals": "2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -46,6 +49,7 @@
     "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "classnames": "2.3.2",
     "daisyui": "4.4.19",
+    "gh-pages": "^6.1.0",
     "prettier": "3.0.3",
     "react-router-dom": "6.17.0",
     "tailwindcss": "3.3.3"
